@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Peculiar Media | Company LTD</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+<div class="container">
+<!-- LEFT SIDE: Input Form -->
+<div class="form-section no-print">
+    <div class="company_logo">
+    <img src="/assets/logo1 peculiar media.png" alt="logo" width="150">
+    </div>
+<h2><i class="fas fa-pen-fancy"></i> Create Quotation</h2>
+<p>Enter project details and item dimensions</p>
+
+<div class="form-group">
+    <label>Client Name</label>
+    <input type="text" id="clientName" placeholder="e.g. kule belden" value="">
+</div>
+
+<div class="form-group">
+    <label>Project Description</label>
+    <input type="text" id="projectDesc" placeholder="e.g. sticker branding" value="">
+</div>
+
+<!-- Decorative symbol to reveal hidden price input -->
+<span ondblclick="togglePricePerSqm()" style="cursor: pointer; font-size: 12px; color: #ccc; margin-left: 10px;">⚙️</span>
+
+<div class="form-group" id="pricePerSqmGroup" style="display: none;">
+    <label>Price per M<sup>2</sup> (UGX)</label>
+    <input type="number" id="pricePerSqm" placeholder="e.g. 500000" value="">
+</div>
+
+<!-- HIDDEN ADVANCED SETTINGS - Double-click title to unlock -->
+
+
+<h3 style="font-size: 16px; color: #e5da46; margin-top: 25px; margin-bottom: 15px; cursor: pointer; user-select: none; padding: 5px 10px;" ondblclick="toggleHiddenSettings()">
+    <i class="fas fa-ruler"></i> Item Dimensions
+</h3>
+
+<table class="items-table">
+<thead>
+    <tr>
+        <th>Item</th>
+        <th>width (cm)</th>
+        <th>Height (cm)</th>
+        <th>M²</th>
+    </tr>
+</thead>
+<tbody id="itemsBody">
+    <tr>
+        <td><strong>A</strong></td>
+        <td><input type="number" class="height" placeholder="0"></td>
+        <td><input type="number" class="width" placeholder="0"></td>
+        <td class="area">0.00</td>
+    </tr>
+    <tr>
+        <td><strong>B</strong></td>
+        <td><input type="number" class="height" placeholder="0"></td>
+        <td><input type="number" class="width" placeholder="0"></td>
+        <td class="area">0.00</td>
+    </tr>
+    <tr>
+        <td><strong>C</strong></td>
+        <td><input type="number" class="height" placeholder="0"></td>
+        <td><input type="number" class="width" placeholder="0"></td>
+        <td class="area">0.00</td>
+    </tr>
+    <tr>
+        <td><strong>D</strong></td>
+        <td><input type="number" class="height" placeholder="0"></td>
+        <td><input type="number" class="width" placeholder="0"></td>
+        <td class="area">0.00</td>
+    </tr>
+    <tr>
+        <td><strong>E</strong></td>
+        <td><input type="number" class="height" placeholder="0"></td>
+        <td><input type="number" class="width" placeholder="0"></td>
+        <td class="area">0.00</td>
+    </tr>
+</tbody>
+</table>
+
+<button class="btn-generate" onclick="generateQuotation()">
+<i class="fas fa-file-invoice"></i> Get Quotation
+</button>
+</div>
+
+<!-- RIGHT SIDE: Quotation Display -->
+<div class="quotation-section">
+<div class="quote-document">
+<!-- HEADER -->
+<header class="quote-header">
+    <div class="brand-section">
+        <div class="logo"><img src="/assets/logo2 peculiar media.png" alt="logo" width="150"></div>
+    </div>
+    <div class="quote-info">
+        <h1>QUOTATION</h1>
+        <p>Ref: PM/QT/2026/<span id="quoteRef">01</span></p>
+        <p>Date: <span id="quoteDate"></span></p>
+    </div>
+</header>
+
+<!-- CLIENT INFO -->
+<div class="client-info">
+    <h3>Client Information</h3>
+    <div class="info-grid">
+        <p><strong>Client Name:</strong> <span id="displayClient">___________</span></p>
+        <p><strong>Project:</strong> <span id="displayProject">___________</span></p>
+        <p><strong>Rate/M<sup>2</sup></strong> <span id="displayRate">UGX 0</span></p>
+        <p><strong>Contact:</strong> +256 700 </p>
+    </div>
+</div>
+
+<!-- QUOTATION TABLE -->
+<div class="table-wrapper">
+    <h3>Branding Work Items</h3>
+    <table class="quote-table">
+        <thead>
+            <tr>
+                <th>Item</th>
+                <th>Size (M<sup>2</sup>)</th>
+                <th>Rate/M<sup>2</sup> (UGX)</th>
+                <th class="amont">Amount (UGX)</th>
+            </tr>
+        </thead>
+        <tbody id="quoteTableBody">
+            <tr>
+                <td>A</td>
+                <td class="size">0.00</td>
+                <td class="rate">0</td>
+                <td class="amount">0</td>
+            </tr>
+            <tr>
+                <td>B</td>
+                <td class="size">0.00</td>
+                <td class="rate">0</td>
+                <td class="amount">0</td>
+            </tr>
+            <tr>
+                <td>C</td>
+                <td class="size">0.00</td>
+                <td class="rate">0</td>
+                <td class="amount">0</td>
+            </tr>
+            <tr>
+                <td>D</td>
+                <td class="size">0.00</td>
+                <td class="rate">0</td>
+                <td class="amount">0</td>
+            </tr>
+            <tr>
+                <td>E</td>
+                <td class="size">0.00</td>
+                <td class="rate">0</td>
+                <td class="amount">0</td>
+            </tr>
+            <tr class="grand-total-row">
+                <td colspan="3"><strong>TOTAL AMOUNT (UGX)</strong></td>
+                <td class="amount"><strong id="grandTotal">0</strong></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- PAYMENT METHODS -->
+<div class="payment-section">
+    <h3><i class="fas fa-money-bill-wave"></i> Payment Methods</h3>
+    <div class="payment-methods-grid">
+        <button class="payment-method" id="paymentAirtel" onclick="selectPaymentMethod('airtel')">
+            <div class="payment-logo-wrapper">
+                <span style="font-size: 32px; font-weight: 800; color: #E0BB20;">📱</span>
+                <p><strong>AIRTEL</strong></p>
+            </div>
+        </button>
+        <button class="payment-method" id="paymentMTN" onclick="selectPaymentMethod('mtn')">
+            <div class="payment-logo-wrapper">
+                <span style="font-size: 32px; font-weight: 800; color: #E0BB20;">📱</span>
+                <p><strong>MTN</strong></p>
+            </div>
+        </button>
+        <button class="payment-method" id="paymentCash" onclick="selectPaymentMethod('cash')">
+            <div class="payment-logo-wrapper">
+                <span style="font-size: 32px; font-weight: 800; color: #E0BB20;">💵</span>
+                <p><strong>CASH</strong></p>
+            </div>
+        </button>
+        <div class="payment-status-box">
+            <p style="font-size: 12px; color: var(--muted-text); margin-bottom: 10px; text-transform: uppercase;">Payment Status</p>
+            <div id="paymentStatusIndicator" class="payment-status-pending">
+                <span id="statusText">Pending</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- TERMS & CONDITIONS -->
+<div class="terms-section">
+    <h3>Terms & Conditions</h3>
+    <ul>
+        <li>This quotation is valid for 14 days from the date above</li>
+        <li>Payment schedule strictly as per milestones outlined</li>
+        <li>All prices are in UGX and exclude installation charges</li>
+        <li>Delivery timeline: 7-14 days after payment confirmation</li>
+        <li>Changes to design or specifications may affect pricing</li>
+    </ul>
+</div>
+
+<!-- SIGN OFF -->
+<div class="signoff-section">
+    <h3>Authorization & Sign Off</h3>
+    <div class="signature-grid">
+        <div class="signature-block">
+            <p class="sig-line">_________________________</p>
+            <p><strong>Creative Director</strong></p>
+            <p class="company">Peculiar Media</p>
+            <p class="date">Date: _______________</p>
+        </div>
+        <div class="signature-block">
+            <p class="sig-line">__________________________</p>
+            <p><strong>Client Signature</strong></p>
+            <p id="clientSigName">_______________</p>
+            <p class="date">Date: _______________</p>
+        </div>
+    </div>
+</div>
+
+        <!--PECULIAR FOOTER -->
+        <footer class="quote-footer">
+            <p>PECULIAR Media | Tel: +256 70 | Email: info@peculiarmedia.com | www.peculiarmedia.com</p>
+        </footer>
+    </div>
+</div>
+</div>
+<script src="brands.js"></script>
+</body>
+</html>

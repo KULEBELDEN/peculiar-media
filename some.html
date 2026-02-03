@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>My Online Store</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    <h1>My Online Store</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="products.html">Products</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <input type="text" id="searchInput" placeholder="Search products..." />
+  </header>
+
+  <main id="productList">
+    <div class="product" data-name="Laptop">
+      <h3>Laptop</h3>
+      <p>$1200</p>
+    </div>
+    <div class="product" data-name="Phone">
+      <h3>Phone</h3>
+      <p>$800</p>
+    </div>
+    <div class="product" data-name="Headphones">
+      <h3>Headphones</h3>
+      <p>$150</p>
+    </div>
+  </main>
+
+  <script src="search.js"></script>
+</body>
+</html>
+
+<!-- products.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Products</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <h1>All Products</h1>
+  <a href="index.html">Back to Home</a>
+</body>
+</html>
+
+<!-- about.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>About Us</title>
+</head>
+<body>
+  <h1>About Our Store</h1>
+  <p>We sell high-quality tech products online.</p>
+  <a href="index.html">Back to Home</a>
+</body>
+</html>
+
+<!-- contact.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Contact</title>
+</head>
+<body>
+  <h1>Contact Us</h1>
+  <p>Email: support@mystore.com</p>
+  <a href="index.html">Back to Home</a>
+</body>
+</html>
+
+<!-- styles.css -->
+body { font-family: Arial, sans-serif; }
+header { background: #222; color: #fff; padding: 10px; }
+nav a { color: #fff; margin-right: 10px; }
+.product { border: 1px solid #ccc; padding: 10px; margin: 10px; }
+
+<!-- search.js -->
+const searchInput = document.getElementById('searchInput');
+const products = document.querySelectorAll('.product');
+
+searchInput.addEventListener('keyup', () => {
+  const value = searchInput.value.toLowerCase();
+  products.forEach(product => {
+    const name = product.dataset.name.toLowerCase();
+    product.style.display = name.includes(value) ? 'block' : 'none';
+  });
+});
