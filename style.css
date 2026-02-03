@@ -352,13 +352,16 @@ body {
 
 .payment-method {
     background: linear-gradient(135deg, rgba(224, 187, 32, 0.15) 0%, rgba(132, 24, 24, 0.1) 100%);
-    padding: 25px;
     border-radius: 10px;
     border: 2px solid rgba(224, 187, 32, 0.2);
     cursor: pointer;
     transition: all 0.3s ease;
     text-align: center;
     box-shadow: 0 6px 15px rgba(224, 187, 32, 0.15);
+     span{
+        width: 95%;
+        border-radius: 8px;
+    }
 }
 
 .payment-method:hover {
@@ -1058,3 +1061,4 @@ body {
         margin: 10px;
     }
 }
+
