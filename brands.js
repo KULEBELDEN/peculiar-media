@@ -197,4 +197,14 @@ function generateQuotation() {
 
 // Run setup when page loads
 document.addEventListener("DOMContentLoaded", setupDynamicRows);
+function generateQuotation() {
+    // Update everything first
+    updateQuotation();
+    
+    // Wait a moment then print
+    setTimeout(() => {
+        window.print();
+    }, 100);
+}
+updateQuotation();
 
